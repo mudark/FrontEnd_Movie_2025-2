@@ -17,13 +17,12 @@ function deleteMovies() {
 }
 
 const debounceSearch=debounce(function() {
-  event.preventDefault();
   deleteMovies();
   value=document.getElementById('search-text').value;
   console.log(`search? : ${value}`);
   requestTmdb(page,value);
 });
-function search() {debounceSearch();};
+function search() {event.preventDefault(); debounceSearch();};
 
 const debounceAddMovies=debounce(function() {  
   requestTmdb(++page,value);
