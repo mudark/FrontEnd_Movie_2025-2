@@ -1,11 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>front-movie-2025-2</title>
-  </head>
-  <body>
-    기본 html 작성
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/styles/reset.css">
+  <link rel="stylesheet" href="src/styles/style.css">
+  <script src="src/apis/index.js" type="module"></script>
+  <title>front-movie-2025-2</title>
+</head>
+<body>
+  <header id="header">
+    <button id="logo-btn">
+      <img id="logo" src="src/assets/logo.png">
+    </button>
+    <form id="search">
+      <input type="text" id="search-text" placeholder="검색">
+      <button id="search-btn"><img src="src/assets/search_button.png"></button>
+    </form>
+  </header>
+  <section id="moviepage">
+    <p id="pagename">지금 인기있는 영화</p>
+    <div id="list">
+
+    </div>
+    <button id="add-btn">더보기</button>
+  </section>
+  <div id="loading-wrap">
+    <div id="loading-spinner"></div>
+    <p><b>로딩 중...</b></p>
+  </div>
+</body>
 </html>
