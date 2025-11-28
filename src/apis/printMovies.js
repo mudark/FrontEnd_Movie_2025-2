@@ -1,4 +1,10 @@
-
+import { getMovieDetail } from './moviedetail.jsx';
+function clickView(event) {
+    const movie_btn=event.currentTarget;
+    const movie_id=movie_btn.getAttribute('data-id');
+    const root=ReactDOM.createRoot(movie_btn);
+    root.render(getMovieDetail(movie_id));
+}
 export function addMoives(movie_list) {
     const list=document.getElementById('list');
     let movie_row;
@@ -9,9 +15,10 @@ export function addMoives(movie_list) {
             list.appendChild(movie_row);    
         }
         const movie=movie_list[i];
-        const view=document.createElement('div');
+        const view=document.createElement('button');
         view.classList.add('movieview');
-
+        view.setAttribute('data-id',movie.id);
+        
         const poster_path=`https://image.tmdb.org/t/p/original${movie.poster_path}`;
         const poster=document.createElement('img');
         poster.classList.add('poster');
@@ -30,6 +37,7 @@ export function addMoives(movie_list) {
         const star=document.createElement('img');
         star.setAttribute('src','./src/assets/star.svg');
         view.appendChild(star);
+        view.addEventListener('click',clickView);
 
         movie_row.appendChild(view);
     }

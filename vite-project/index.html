@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vite-project</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <header id="header">
+    <button id="logo-btn">
+      <img id="logo" src="src/assets/logo.png">
+    </button>
+    <form id="search">
+      <input type="text" id="search-text" placeholder="검색">
+      <button id="search-btn"><img src="src/assets/search_button.png"></button>
+    </form>
+  </header>
+  <section id="moviepage">
+    <p id="pagename">지금 인기있는 영화</p>
+    <div id="list">
+
+    </div>
+    <button id="add-btn">더보기</button>
+  </section>
+  <div id="loading-wrap">
+    <div id="loading-spinner"></div>
+    <p><b>로딩 중...</b></p>
+  </div>
+  </body>
+</html>

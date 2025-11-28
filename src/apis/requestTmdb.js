@@ -12,7 +12,7 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4MmRjYmM2N2EyMWQ3ODdkZWVmMzU0MzQwMDRiZjc5YyIsIm5iZiI6MTc2Mjc2OTUxNS4wMTIsInN1YiI6IjY5MTFiYTZiMmUyZDY1MmJhNjNhMzFhZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HkHOm25bJkzS1zPhxjqDz5cBRlJps3yp4sc16SDsViw'
+    Authorization: import.meta.env.LIST_API_KEY
   }
 };
 export function requestTmdb(page=1,value=undefined) {

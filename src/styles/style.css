@@ -1,13 +1,6 @@
 * {
     color: white;
-}
-body {
-    background-color: black;
-}
-#logo-btn {
-    margin: 20px;
-    border-style: none;
-    background-color: black;
+    background: black;
 }
 #logo {
     height: 20px;
@@ -29,7 +22,7 @@ body {
     border-style: none;
     color: black;
 }
-#moviepage {
+#movie-table {
     width: 920px;
     margin: 20px auto;
     border: red 1px none;
@@ -37,7 +30,7 @@ body {
 #pagename {
     margin: 0;
 }
-#add-btn {
+#movie-more-btn {
     background-color: red;
     width: 100%;
 }
@@ -50,16 +43,18 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.movieview{
+.movie-card{
     width: 182px;
     height: 359px;
     border: white 1px none;
+    background: black;
 }
 .poster {
     width: 100%;
     height: 273px;
+    object-fit: cover;
 }
-#loading-wrap {
+#loading-wrap, #movie-detail-wrap {
     display: none;
     flex-direction: column;
     align-items: center;
@@ -82,4 +77,67 @@ body {
 @keyframes rotate {
     form {transform: rotate(0deg);}
     to {transform: rotate(360deg);}
+}
+#movie-detail {
+    width: 1000px;
+    height: 720px;
+    margin: 20px auto;
+    z-index: 10;
+    position: relative;
+    background: #212121;
+    border-radius: 20px;
+}
+#movie-detail > * {
+    position: absolute;   
+}
+#movie-detail * {
+    background: #212121;
+}
+#movie-detail-title {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    top: 0;
+}
+#movie-detail-poster {
+    width: 360px;
+    height: 540px;
+    object-fit: cover;
+    bottom: 40px;
+    left: 40px;
+}
+#movie-detail-info {
+    width: 520px;
+    height: 200px;
+    top: 100px;
+    right: 40px;
+    text-align: left;
+}
+#detail-close-btn {
+    top: 10px;
+    right: 10px;
+    border-style: solid 1px white;
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    background: #383838;
+    text-align: center;
+    line-height: 18px;
+    z-index: 20;
+}
+#my-vote {
+    width: 540px;
+    height: 80px;
+    background: #383838;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 10px;
+    text-align: left;
+    padding: 10px;
+}
+.half-star-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
