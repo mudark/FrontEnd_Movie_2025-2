@@ -17,15 +17,18 @@ console.log(import.meta.env.LIST_API_KEY);
 function MovieTable() {
   const [movie_list, setMovieList] = useState([]);
   const [page, setPage] = useState(1);
+  const [input_text, setInputText] = useState("");
   const [query, setQuery] = useState("");
   const [movie_detail, setMovieDetail] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
   const [my_vote, setMyVote] = useState(0);
-
+  const [show_more_btn, setShowMoreBtn] = useState(true);
+  
   const handlerSearch = (e) => {
     e.preventDefault();
-    setQuery(e.target[0].value);
-    console.log("검색어:", e.target[0].value);
+    if (input_text === "") return;
+    setQuery(input_text);
+    console.log("검색어:", input_text);
     setMovieList([]);
     setPage(1);
   }
@@ -73,6 +76,11 @@ function MovieTable() {
       return data.results;
     }
     fetchMovies(url).then(fetchedMovies => {
+      if (fetchedMovies.length < 20) {
+        setShowMoreBtn(false);
+      } else {
+        setShowMoreBtn(true);
+      }
       setMovieList([...movie_list, ...fetchedMovies]);
     }).catch(error => {
       console.error(error);
@@ -136,6 +144,7 @@ function MovieTable() {
         id="logo"
         type="button"
         onClick={() => {
+          if (query === "") return;
           setQuery("");
           setMovieList([]);
           setPage(1);
@@ -147,11 +156,8 @@ function MovieTable() {
           type="text"
           id="search-text"
           placeholder="검색"
-          value={query}
-          onChange={(e) => {
-            setMovieList([]);
-            setQuery(e.target.value);
-          }}
+          value={input_text}
+          onChange={(e) => setInputText(e.target.value)}
         />
         <button id="search-btn" type="submit">
           <img src={search_btn_image} />
@@ -159,7 +165,9 @@ function MovieTable() {
       </form>
     </header>
     <div id="movie-table">
-      <p id="movie-table-title">현재 인기있는 영화</p>
+      <p id="movie-table-title">
+        {(query === "") ? '현재 인기있는 영화' : `검색 결과 : ${query}`}
+      </p>
       {movie_list.length === 0 && (
         <span>검색 결과 없음</span>
       )}
@@ -169,12 +177,12 @@ function MovieTable() {
           key={movie.id}
           data-id={movie.id}
           onClick={(e) => handlerMovieDetail(e)}
-          >
+        >
           <img
             className="poster"
             src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           />
-          <p>{movie.title}</p>
+          <p className="movie-card-title">{movie.title}</p>
           <span>{movie.vote_average.toFixed(1)}</span>
           <img src={star_image} />
         </button>
@@ -182,8 +190,9 @@ function MovieTable() {
       <button
         id="movie-more-btn"
         type="button"
+        style={{display: show_more_btn ? "block" : "none"}}
         onClick={() => setPage(page + 1)}
-        >
+      >
         영화 더보기
       </button>
     </div>
