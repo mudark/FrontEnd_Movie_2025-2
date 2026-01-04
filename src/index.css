@@ -6,6 +6,9 @@
 @layer base {
   * {
     /* 굵은 검은색 글씨와 흰색 배경을 원하신다면 */
-    @apply bg-black text-white;
+    @apply text-white;
+  }
+  body {
+    @apply bg-black;
   }
 }

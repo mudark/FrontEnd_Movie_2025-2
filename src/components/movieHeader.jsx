@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useMyMoviesContext} from "../hooks/useMyMoviesContext.jsx"
+import useUser from "../store/user.jsx"
 import logo_image from "../assets/logo.png";
 import search_btn_image from "../assets/search_button.png";
 import login_image from "../assets/login.svg";
@@ -8,7 +8,7 @@ import login_image from "../assets/login.svg";
 export default function MovieHeader() {
     const [input_query,setInputQuery]=useState("");
     const [show_login, setShowLogin]=useState(false);
-    const my_movies=useMyMoviesContext();
+    const user=useUser();
     const navigate=useNavigate();
     const handlerInputQuery=(e)=>{ 
         e.preventDefault();
@@ -30,16 +30,16 @@ export default function MovieHeader() {
     }
     const handlerLoginout=(e)=>{
         e.preventDefault();
-        if (my_movies.id==="") {
+        if (user.id==="") {
             navigate(`/login`);
         } else {
-            my_movies.setId("");
+            user.setId("");
             navigate(`/`);
         }
     }
     const handlerSignup=(e)=>{
         e.preventDefault();
-        if (my_movies.id==="") {
+        if (user.id==="") {
             navigate(`/signup`);
         } else {
             navigate(`/mypage`);
@@ -56,7 +56,7 @@ export default function MovieHeader() {
                     src={logo_image}
                 />
             </button>
-            <form className="w-[320px] max-[750px]:w-[44px] max-[750px]:focus-within:w-[calc(100%-50px)] h-[44px] absolute right-[40px] top-[8px] bg-white rounded-[8px] flex justify-between items-center group"
+            <form className="w-[320px] max-[750px]:w-[44px] max-[750px]:focus-within:w-[calc(100%-100px)] h-[44px] absolute right-[80px] top-[8px] bg-white rounded-[8px] flex justify-between items-center group"
                 onSubmit={(e) => handleSubmit(e)}
             >
                 <input 
@@ -71,9 +71,9 @@ export default function MovieHeader() {
                         src={search_btn_image}
                     />
                 </button>
-            </form>
+            </form>       
             <button 
-                className="w-[37px] h-[37px] absolute right-0 top-[12px]"
+                className="w-[37px] h-[37px] absolute right-[35px] top-[12px]"
                 onClick={(e)=>handlerShowLogin(e)}
             >
                 <img 
@@ -81,15 +81,19 @@ export default function MovieHeader() {
                     src={login_image}
                 />
             </button>
+            <div className={`${(show_login)?`block`:`hidden`} absolute w-[16px] h-[16px] top-[60px] right-[45px] bg-white rotate-45`}/>
             <div
-                className={`${(show_login)?`block`:`hidden`} absolute top-[60px] right-[0px] bg-white text-black flex flex-col`}
+                className={`${(show_login)?`block`:`hidden`} absolute top-[65px] right-[0px] bg-white text-black flex flex-col rounded-[5px] [&_*]:font-[600]`}
             >
                 <button
                     onClick={e=>handlerLoginout(e)}
-                >{(my_movies.id==="")?`로그인`:`로그아웃`}</button>
+                    className={`w-[107px] h-[44px] ${(user.id==="")?`text-black`:`text-red-500`}`}
+                >{(user.id==="")?`로그인`:`로그아웃`}</button>
+                <hr className={`border-[1px] border-zinc-400`}/>
                 <button
                     onClick={e=>handlerSignup(e)}
-                >{(my_movies.id==="")?`회원 가입`:`마이페이지`}</button>
+                    className={`w-[107px] h-[44px]`}
+                >{(user.id==="")?`회원 가입`:`마이페이지`}</button>
             </div>
         </header>
     )

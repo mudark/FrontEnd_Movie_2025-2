@@ -1,11 +1,11 @@
 import React,{useState} from "react";
-import {useMyMoviesContext} from "../hooks/useMyMoviesContext";
+import useUser from "../store/user";
 import {useNavigate} from "react-router-dom";
 import MovieHeader from "../components/movieHeader";
 
 export default function LoginPage() {
-    const my_movies=useMyMoviesContext();
     const navigate=useNavigate();
+    const user=useUser();
     const [id,setId]=useState("");
     const [pw,setPw]=useState("");
     const handlerInputId=(e)=>{
@@ -18,7 +18,7 @@ export default function LoginPage() {
     }
     const handlerLogin=(e)=>{
         e.preventDefault();
-        my_movies.setId(id);
+        user.setId(id);
         navigate(`/mypage`);
     }
     const handlerSignUp=(e)=>{

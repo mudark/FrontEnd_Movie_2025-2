@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
-import { useMyMoviesContext } from "../hooks/useMyMoviesContext";
+import useUser from "../store/user.jsx"
 import MovieHeader from "../components/movieHeader";
 
 export default function SignupPage() {
     const navigate=useNavigate();
-    const my_movies=useMyMoviesContext();
+    const user=useUser();
     const [id,setId]=useState("");
     const [pw,setPw]=useState("");
     const [name,setName]=useState("");
@@ -28,9 +28,9 @@ export default function SignupPage() {
     }
     const handlerSignUp=(e)=>{
         e.preventDefault();
-        my_movies.setId(id);
-        my_movies.setName(name);
-        my_movies.setGenres(genres);
+        user.setId(id);
+        user.setName(name);
+        user.setGenres(genres);
         navigate(`/mypage`);
     }
     return (
